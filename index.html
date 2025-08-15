@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Baby Shower de Camila Victoria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #fff7fb;
+      --text: #3a2a35;
+      --muted: #7a6573;
+      --accent: #ff8db3;
+      --accent-strong: #ff6a9a;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: Poppins, sans-serif; background: var(--bg); color: var(--text); text-align: center; }
+    header { padding: 20px; font-family: 'Playfair Display', serif; font-size: 28px; color: var(--accent-strong); }
+    .countdown { display: flex; justify-content: center; gap: 15px; margin-top: 20px; }
+    .chip { background: white; border: 2px solid var(--accent); border-radius: 10px; padding: 10px 15px; }
+    .chip b { font-size: 22px; color: var(--accent-strong); }
+    .chip small { color: var(--muted); }
+    footer { margin-top: 40px; font-size: 14px; color: var(--muted); }
+    #preloader { position: fixed; inset: 0; background: linear-gradient(#ffeef5, #fff7fb); overflow: hidden; display: flex; align-items: center; justify-content: center; flex-direction: column; z-index: 9999; font-family: 'Playfair Display', serif; transition: opacity .8s ease; }
+    #preloader.hidden { opacity: 0; pointer-events: none; }
+    #preloader .stage { position: absolute; inset: 0; pointer-events: none; }
+    .cloud-preloader { position: absolute; background: #fff; border-radius: 40px; filter: drop-shadow(0 6px 12px rgba(0,0,0,.04)); opacity: .95; animation: float 12s ease-in-out infinite; }
+    .cloud-preloader::before, .cloud-preloader::after { content: ""; position: absolute; background: #fff; border-radius: 50%; }
+    .cloud-preloader::before { width: 90px; height: 90px; left: 10px; top: -32px; }
+    .cloud-preloader::after { width: 70px; height: 70px; right: 10px; top: -18px; }
+    @keyframes float { 0%,100%{ transform:translateY(0) } 50%{ transform:translateY(-12px) } }
+    .floating-balloon { position: absolute; bottom: -120px; width: 65px; height: 75px; background: linear-gradient(135deg, pink, #ff9ecb); border-radius: 50% 50% 50% 50%/60% 60% 40% 40%; box-shadow: 0 8px 18px rgba(255,122,167,.35); animation: rise 6s linear infinite; }
+    .floating-balloon::after { content: ""; position: absolute; bottom: -50px; left: 50%; transform: translateX(-50%); width: 2px; height: 50px; background: #e7b3c6; animation: sway 1.5s ease-in-out infinite, wiggle 2.5s ease-in-out infinite; }
+    @keyframes rise { 0%{ transform:translateY(0) scale(1); opacity:1 } 80%{ opacity:1 } 100%{ transform:translateY(-120vh) scale(1.05); opacity:0 } }
+    @keyframes sway { 0%,100%{ transform:translateX(-50%) rotate(6deg)} 50%{ transform:translateX(-50%) rotate(-6deg)} }
+    @keyframes wiggle { 0%,100%{ transform: translateX(-50%) rotate(0deg) } 25%{ transform: translateX(-48%) rotate(4deg) } 50%{ transform: translateX(-52%) rotate(-4deg) } 75%{ transform: translateX(-49%) rotate(2deg) } }
+    #enterBtn { margin-top: 20px; background: var(--accent); color: #fff; border: none; width: 140px; height: 90px; font-size: 14px; cursor: pointer; z-index: 10; position: relative; border-radius: 6px; box-shadow: 0 4px 8px rgba(0,0,0,0.15); overflow: hidden; }
+    #enterBtn::before { content: ""; position: absolute; top: 0; left: 0; width: 0; height: 0; border-left: 70px solid transparent; border-right: 70px solid transparent; border-top: 45px solid white; }
+    #enterBtn::after { content: ""; position: absolute; top: 18px; left: 50%; transform: translateX(-50%); width: 12px; height: 12px; background: red; border-radius: 50%; z-index: 2; }
+    #enterBtn span { position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); z-index: 1; font-weight: bold; }
+    #enterBtn:hover { background: var(--accent-strong); }
+    #logo-bebe { width: 100px; height: 100px; margin-bottom: 10px; z-index: 11; }
+    .card.hero-card { margin: 40px auto; max-width: 500px; background: white; border-radius: 20px; padding: 20px; box-shadow: 0 5px 15px rgba(0,0,0,.05); }
+    .scene { position: relative; border-radius: 14px; background: radial-gradient(220px 120px at 90% 0%, #fff2f7, transparent 60%), linear-gradient(180deg, #ffeefa, #fff); padding: 40px 20px; overflow: hidden; }
+    .cloud { position: absolute; background: #fff; border-radius: 40px; filter: drop-shadow(0 6px 12px rgba(0,0,0,.04)); opacity: .95; z-index: 0; }
+    .cloud::before, .cloud::after { content: ""; position: absolute; background: #fff; border-radius: 50%; }
+    .cloud::before { width: 90px; height: 90px; left: 10px; top: -32px; }
+    .cloud::after { width: 70px; height: 70px; right: 10px; top: -18px; }
+    .cloud.c1 { width: 160px; height: 70px; left: 18px; top: 18px; animation: float 8s ease-in-out infinite; }
+    .cloud.c2 { width: 140px; height: 60px; right: 28px; bottom: 18px; transform: scale(.9); animation: float 9s ease-in-out -2s infinite; }
+    .star-scene { position: absolute; top: 50%; right: 40px; transform: translateY(-50%); font-size: 80px; color: #ffeb99; }
+    .text-overlay { position: relative; z-index: 1; text-align:center; margin-top: 60px; }
+  </style>
+</head>
+<body>
+  <audio id="bg-music" src="cuna.mp3" loop></audio>
+  <div id="preloader">
+    <div class="stage">
+      <div class="cloud-preloader" style="width: 160px; height: 70px; top: 20px; left: 10%;"></div>
+      <div class="cloud-preloader" style="width: 140px; height: 60px; bottom: 50px; right: 15%; animation-delay: -3s"></div>
+    </div>
+    <img id="logo-bebe" src="bebe.png" alt="Logo bebé">
+    <h1 id="welcome" style="z-index:11">Bienvenidos</h1>
+    <button id="enterBtn"><span>Abrir invitación</span></button>
+  </div>
+  <header>Baby Shower de Camila Victoria</header>
+  <p>Martes 19 — Celebramos su llegada 💕</p>
+  <h2>Cuenta regresiva</h2>
+  <div class="countdown">
+    <div class="chip"><b id="dd">0</b><small>días</small></div>
+    <div class="chip"><b id="hh">0</b><small>horas</small></div>
+    <div class="chip"><b id="mm">0</b><small>min</small></div>
+    <div class="chip"><b id="ss">0</b><small>seg</small></div>
+  </div>
+  <div class="card hero-card">
+    <div class="scene">
+      <div class="cloud c1"></div>
+      <div class="cloud c2"></div>
+      <div class="star-scene">★</div>
+      <div class="text-overlay">
+        <div style="font-family:'Playfair Display',serif; font-size:28px; color:#a2677f">Camila Victoria</div>
+        <div style="font-size:14px; color:#b88697">¡Ya casi llega!</div>
+      </div>
+    </div>
+    <p class="muted" style="margin-top:12px">Te esperamos para celebrar</p>
+  </div>
+  <footer>Con cariño para nuestra compañera Arely 💗</footer>
+  <script>
+    const EVENT_DATE = new Date('2025-08-19T16:00:00');
+    function updateCountdown(){ const t = EVENT_DATE.getTime() - Date.now(); if(t<=0) return [0,0,0,0]; const s = Math.floor(t/1000); return [Math.floor(s/86400), Math.floor((s%86400)/3600), Math.floor((s%3600)/60), s%60]; }
+    function renderCountdown(){ const [d,h,m,s]=updateCountdown(); dd.textContent=d; hh.textContent=h; mm.textContent=m; ss.textContent=s; }
+    setInterval(renderCountdown,1000); renderCountdown();
+    function createFloatingBalloons(n){ const colors=['#ffb6c1','#ffc1cc','#ffd1dc','#ffe4e9','#ff9ecb']; for(let i=0;i<n;i++){ const b=document.createElement('div'); b.className='floating-balloon'; b.style.left=Math.random()*100+'vw'; b.style.animationDuration=(5+Math.random()*4)+'s'; const c=colors[Math.floor(Math.random()*colors.length)]; b.style.background=`linear-gradient(135deg, ${c}, #ffb3c6)`; document.getElementById('preloader').appendChild(b);} }
+    createFloatingBalloons(6);
+    function confettiBurst(){ const n=80, frag=document.createDocumentFragment(); for(let i=0;i<n;i++){ const s=document.createElement('span'); s.style.position='fixed'; s.style.width='8px'; s.style.height='14px'; s.style.left=Math.random()*100+'vw'; s.style.top='-20px'; s.style.background=`hsl(${Math.random()*360},80%,70%)`; s.style.transform=`rotate(${Math.random()*360}deg)`; s.style.borderRadius='2px'; s.style.zIndex=2000; s.style.pointerEvents='none'; const fall=3000+Math.random()*2000; s.animate([{transform:s.style.transform, top:'-20px', opacity:1},{transform:`translateX(${(Math.random()*2-1)*100}px) rotate(${Math.random()*720}deg)`, top:'110vh', opacity:.9}],{duration:fall,easing:'cubic-bezier(.2,.8,.2,1)'}); setTimeout(()=>s.remove(),fall+100); frag.appendChild(s);} document.body.appendChild(frag);}    
+    document.getElementById('enterBtn').addEventListener('click',()=>{ 
+      document.getElementById('preloader').classList.add('hidden'); 
+      confettiBurst(); 
+      document.getElementById('bg-music').play();
+    });
+  </script>
+</body>
+</html>
